@@ -61,7 +61,6 @@ class EditUserActivity : AppCompatActivity() {
         )
 
     }
-
     @RequiresApi(Build.VERSION_CODES.O)
     private fun getDataUser(id: String) {
         editUserViewModel.getAuth().observe(this) { user ->

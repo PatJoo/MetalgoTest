@@ -11,16 +11,18 @@ import com.dicoding.metalgotest.ui.viewmodel.AuthViewModel
 import com.dicoding.metalgotest.ui.viewmodel.DetailUserViewModel
 import com.dicoding.metalgotest.ui.viewmodel.MainViewModel
 
-class ViewModelFactory private constructor(private val pref: AuthPreferences, private val repository: Repository) :
-    ViewModelProvider.NewInstanceFactory(){
+class ViewModelFactory private constructor(
+    private val pref: AuthPreferences,
+    private val repository: Repository
+) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if(modelClass.isAssignableFrom(AuthViewModel::class.java)){
+        if (modelClass.isAssignableFrom(AuthViewModel::class.java)) {
             return AuthViewModel(pref, repository) as T
-        } else if (modelClass.isAssignableFrom(MainViewModel::class.java)){
-            return MainViewModel(pref, repository)as T
-        }else if (modelClass.isAssignableFrom(MainViewModel::class.java)){
-            return DetailUserViewModel(pref, repository)as T
+        } else if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
+            return MainViewModel(pref, repository) as T
+        } else if (modelClass.isAssignableFrom(DetailUserViewModel::class.java)) {
+            return DetailUserViewModel(pref, repository) as T
         }
         return super.create(modelClass)
     }
@@ -28,9 +30,13 @@ class ViewModelFactory private constructor(private val pref: AuthPreferences, pr
     companion object {
         @Volatile
         private var instance: ViewModelFactory? = null
+
         fun getInstance(dataStore: DataStore<Preferences>): ViewModelFactory =
             instance ?: synchronized(this) {
-                instance ?: ViewModelFactory(Injection.provideAuthPref(dataStore), Injection.provideRepository())
+                instance ?: ViewModelFactory(
+                    Injection.provideAuthPref(dataStore),
+                    Injection.provideRepository()
+                )
             }.also { instance = it }
     }
 }

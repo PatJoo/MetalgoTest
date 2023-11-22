@@ -105,9 +105,8 @@ fun ByteArray.toHex(): String {
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun LocalDate.toIsoString(): String {
-    val localDate = this
+    val localDateTime = this.atStartOfDay()
     val outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-    val localDateTime = localDate.atStartOfDay()
     val zonedDateTime = localDateTime.atZone(ZoneId.of("America/New_York"))
     return outputFormatter.format(zonedDateTime)
 }

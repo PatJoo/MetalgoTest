@@ -27,6 +27,7 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import java.io.File
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 class AddUser : AppCompatActivity() {
 
@@ -71,8 +72,8 @@ class AddUser : AppCompatActivity() {
                 val address = binding.edtAddress.text.toString()
                 val password = binding.edtPassword.text.toString()
 
-                val formatter = DateTimeFormatter.ofPattern("dd MM yyyy")
-                val current = LocalDate.parse(binding.edtDate.text, formatter)
+                val formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy", Locale.ENGLISH)
+                val current = LocalDate.parse(binding.edtDate.text?.trim(), formatter)
                 val dob = current.toIsoString()
 
                 val data = RegisterRequest(

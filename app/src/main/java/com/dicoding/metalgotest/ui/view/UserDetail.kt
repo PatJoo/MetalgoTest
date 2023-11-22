@@ -109,9 +109,7 @@ class UserDetail : DialogFragment() {
 
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
         val date = LocalDate.parse(data.dateOfBirth, formatter)
-        binding.tvBirth.text = "${date.dayOfMonth} ${
-            date.month.toString().lowercase().replaceFirstChar { it.uppercase() }
-        } ${date.year}"
+        binding.tvBirth.text = "${date.dayOfMonth} ${date.month.toString().lowercase().replaceFirstChar { it.uppercase() }} ${date.year}"
 
         val imageBytes = Base64.decode(data.photo, Base64.DEFAULT)
         val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
@@ -129,7 +127,7 @@ class UserDetail : DialogFragment() {
     }
 
     companion object {
-        private const val TAG = "DetailUserDialogFragment"
+        private const val TAG = "UserDetail"
         const val KEY = "key"
     }
 }

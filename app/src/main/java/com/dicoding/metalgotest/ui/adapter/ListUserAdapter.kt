@@ -28,9 +28,7 @@ class ListUserAdapter (private val listUser: List<DetailListUser>) :
         val binding = ItemListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
-
         override fun getItemCount() = listUser.size
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.apply {
