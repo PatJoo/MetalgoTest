@@ -9,7 +9,7 @@ import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.metalgotest.data.model.DataUser
-import com.dicoding.metalgotest.databinding.ActivityEditUserBinding
+import com.dicoding.metalgotest.databinding.ActivityUpdateUserBinding
 import com.dicoding.metalgotest.ui.ViewModelFactory
 import com.dicoding.metalgotest.ui.viewmodel.DetailUserViewModel
 import com.dicoding.metalgotest.utils.Response
@@ -18,9 +18,9 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class EditUserActivity : AppCompatActivity() {
+class UpdateUserActivity : AppCompatActivity() {
 
-    private lateinit var binding :ActivityEditUserBinding
+    private lateinit var binding :ActivityUpdateUserBinding
     private val editUserViewModel : DetailUserViewModel  by viewModels {
         ViewModelFactory.getInstance(dataStore)
     }
@@ -29,13 +29,13 @@ class EditUserActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityEditUserBinding.inflate(layoutInflater)
+        binding = ActivityUpdateUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val id = intent.getStringExtra(EXTRA_ID)
         getDataUser(id!!)
 
-        binding.tlBirth.setEndIconOnClickListener{
+        binding.tlDate.setEndIconOnClickListener{
             getDate()
         }
 
@@ -54,7 +54,7 @@ class EditUserActivity : AppCompatActivity() {
 
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
         val date = LocalDate.parse(data.dateOfBirth, formatter)
-        binding.edtBirth.setText(
+        binding.edtDate.setText(
             "${date.dayOfMonth} ${
                 date.month.toString().lowercase().replaceFirstChar { it.uppercase() }
             } ${date.year}"
@@ -91,7 +91,7 @@ class EditUserActivity : AppCompatActivity() {
                         }
                     }
             } else {
-                val intent = Intent(this@EditUserActivity, LoginActivity::class.java)
+                val intent = Intent(this@UpdateUserActivity, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
             }
@@ -108,7 +108,7 @@ class EditUserActivity : AppCompatActivity() {
 
         datePicker.addOnPositiveButtonClickListener {
             val time = datePicker.headerText
-            binding.edtBirth.setText(time)
+            binding.edtDate.setText(time)
         }
     }
 

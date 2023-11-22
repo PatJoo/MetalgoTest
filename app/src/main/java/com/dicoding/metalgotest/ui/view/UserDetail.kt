@@ -55,8 +55,8 @@ class UserDetail : DialogFragment() {
         }
 
         binding.btnEdit.setOnClickListener{
-            val intent = Intent(requireContext(), EditUserActivity::class.java)
-            intent.putExtra(EditUserActivity.EXTRA_ID, id)
+            val intent = Intent(requireContext(), UpdateUserActivity::class.java)
+            intent.putExtra(UpdateUserActivity.EXTRA_ID, id)
             startActivity(intent)
         }
     }

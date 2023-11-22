@@ -19,10 +19,7 @@
         android:theme="@style/Theme.MetalgoTest"
         tools:targetApi="31">
         <activity
-            android:name=".ui.view.EditUserActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.view.UpdateUser"
+            android:name=".ui.view.UpdateUserActivity"
             android:exported="false" />
         <activity
             android:name=".ui.view.AddUser"

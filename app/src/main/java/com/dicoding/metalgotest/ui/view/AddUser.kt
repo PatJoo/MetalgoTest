@@ -56,10 +56,6 @@ class AddUser : AppCompatActivity() {
         binding.btnAddUser.setOnClickListener {
             if (isValidRegister()) {
                 val fullName = binding.edtName.text.toString()
-                val index = fullName.lastIndexOf("")
-
-                val firstName = index.let { it1 -> fullName.substring(0, it1) }
-                val lastName = index.plus(1).let { it1 -> fullName.substring(it1) }
 
                 val gender = when (binding.rgGender.checkedRadioButtonId) {
                     binding.rbMale.id -> "male"
