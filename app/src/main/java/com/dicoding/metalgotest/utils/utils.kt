@@ -7,7 +7,9 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
+import androidx.annotation.RequiresApi
 import com.dicoding.metalgotest.R
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -16,6 +18,9 @@ import java.io.InputStream
 import java.io.OutputStream
 import java.security.MessageDigest
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 private const val FILENAME_FORMAT = "dd-MMM-yyyy"
@@ -98,3 +103,11 @@ fun ByteArray.toHex(): String {
     return joinToString("") { "%02x".format(it) }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
+fun LocalDate.toIsoString(): String {
+    val localDate = this
+    val outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    val localDateTime = localDate.atStartOfDay()
+    val zonedDateTime = localDateTime.atZone(ZoneId.of("America/New_York"))
+    return outputFormatter.format(zonedDateTime)
+}

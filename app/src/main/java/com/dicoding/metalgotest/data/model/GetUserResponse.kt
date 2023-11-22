@@ -2,10 +2,10 @@ package com.dicoding.metalgotest.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class GetUserListResponse(
+data class GetUserResponse(
 
 	@field:SerializedName("data")
-	val listUser: List<DataItem>,
+	val listUser: List<DetailListUser>,
 
 	@field:SerializedName("message")
 	val message: String,
@@ -17,7 +17,7 @@ data class GetUserListResponse(
 	val status: Int
 )
 
-data class DataItem(
+data class DetailListUser(
 
 	@field:SerializedName("address")
 	val address: String,

@@ -8,6 +8,7 @@ import com.dicoding.metalgotest.data.local.AuthPreferences
 import com.dicoding.metalgotest.di.Injection
 import com.dicoding.metalgotest.repository.Repository
 import com.dicoding.metalgotest.ui.viewmodel.AuthViewModel
+import com.dicoding.metalgotest.ui.viewmodel.DetailUserViewModel
 import com.dicoding.metalgotest.ui.viewmodel.MainViewModel
 
 class ViewModelFactory private constructor(private val pref: AuthPreferences, private val repository: Repository) :
@@ -18,6 +19,8 @@ class ViewModelFactory private constructor(private val pref: AuthPreferences, pr
             return AuthViewModel(pref, repository) as T
         } else if (modelClass.isAssignableFrom(MainViewModel::class.java)){
             return MainViewModel(pref, repository)as T
+        }else if (modelClass.isAssignableFrom(MainViewModel::class.java)){
+            return DetailUserViewModel(pref, repository)as T
         }
         return super.create(modelClass)
     }

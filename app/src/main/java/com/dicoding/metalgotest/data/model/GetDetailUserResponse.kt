@@ -31,8 +31,11 @@ data class DataUser(
 	@field:SerializedName("date_of_birth")
 	val dateOfBirth: String,
 
-	@field:SerializedName("name")
-	val name: String,
+	@field:SerializedName("first_name")
+	val firstName: String,
+
+	@field:SerializedName("last_name")
+	val lastName: String,
 
 	@field:SerializedName("photo")
 	val photo: String,

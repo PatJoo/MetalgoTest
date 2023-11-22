@@ -19,9 +19,10 @@ class MainViewModel(private val pref: AuthPreferences, private val repository: R
         }
         fun getListUser(token: String?) = repository.getUserList(token)
 
-        fun clearSession(){
+
+         fun clearSession(){
             viewModelScope.launch{
                 pref.clearSession()
-            }
-        }
+             }
+         }
 }

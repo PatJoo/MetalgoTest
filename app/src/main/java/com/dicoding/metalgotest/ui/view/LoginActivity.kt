@@ -1,11 +1,12 @@
 package com.dicoding.metalgotest.ui.view
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.metalgotest.data.model.LoginRequest
 import com.dicoding.metalgotest.databinding.ActivityLoginBinding
 import com.dicoding.metalgotest.ui.ViewModelFactory
@@ -21,32 +22,35 @@ class LoginActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(dataStore)
     }
 
-
+    private var loginValidation = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        loginChecker()
+
         binding.btnSignIn.setOnClickListener {
             val email = binding.edtEmail.text.toString()
-            val password = binding.edtPassword.text.toString()
+            val password = binding.edtPassword.text.toString().sha256()
             when {
-                email.isEmpty() -> {
-                    binding.edtEmail.error = "Masukkan email"
-                    Toast.makeText(this@LoginActivity, "Masukan email", Toast.LENGTH_SHORT).show()
+                email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+                    binding.edtEmail.error = "Enter your email correctly!"
                 }
-                password.isEmpty() -> {
-                    binding.edtPassword.error = "Masukkan password"
-                    Toast.makeText(this@LoginActivity, "Masukkan password", Toast.LENGTH_SHORT)
-                        .show()
+                password.isEmpty() || password.length < 8 -> {
+                    binding.edtPassword.error = "Enter your password!"
                 }
                 else -> {
                     val data = LoginRequest(
-                        binding.edtEmail.text.toString(),
-                        binding.edtPassword.text.toString().sha256()
+                        email,password
                     )
                     login(data)
                 }
+            }
+
+            binding.btnAddUser.setOnClickListener {
+                val intent = Intent(this, AddUser::class.java)
+                startActivity(intent)
             }
         }
     }
@@ -72,6 +76,18 @@ class LoginActivity : AppCompatActivity() {
                 }
 
             }
+        }
+    }
+
+    private fun loginChecker() {
+        showLoading(true)
+        authViewModel.getAuth().observe(this) { user ->
+            if (user.token != "null") {
+                showLoading(false)
+                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                finish()
+            }
+            showLoading(false)
         }
     }
 

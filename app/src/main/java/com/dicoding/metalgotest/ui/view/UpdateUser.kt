@@ -1,7 +1,7 @@
 package com.dicoding.metalgotest.ui.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.metalgotest.R
 
 class UpdateUser : AppCompatActivity() {

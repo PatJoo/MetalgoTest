@@ -22,7 +22,7 @@
 
         <ImageView
              android:layout_marginStart="16dp"
-            android:id="@+id/imageView3"
+            android:id="@+id/ivUserPhoto"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/ic_image"
@@ -42,7 +42,7 @@
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/tvDateOfBirth"
-            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintStart_toEndOf="@+id/ivUserPhoto"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView

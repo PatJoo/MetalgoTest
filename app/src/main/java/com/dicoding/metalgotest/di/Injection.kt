@@ -3,6 +3,7 @@ package com.dicoding.metalgotest.di
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.dicoding.metalgotest.data.local.AuthPreferences
+import com.dicoding.metalgotest.data.remote.ApiConfig
 import com.dicoding.metalgotest.repository.Repository
 
 object Injection {
@@ -11,6 +12,7 @@ object Injection {
     }
 
     fun provideRepository(): Repository {
-        return Repository()
+        val apiService = ApiConfig.getApiService()
+        return Repository(apiService)
     }
 }
